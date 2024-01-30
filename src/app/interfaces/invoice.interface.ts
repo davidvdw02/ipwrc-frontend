@@ -1,4 +1,4 @@
-interface Invoice {
+export interface Invoice {
   order: string;
   account: string;
   invoiceAddress: string;

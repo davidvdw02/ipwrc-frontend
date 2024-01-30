@@ -1,16 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/interfaces/product.interface';
-
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class ProductComponent implements OnInit {
   @Input() product: any;
-  constructor() { }
 
   ngOnInit(): void {
   }
-
 }

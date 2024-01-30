@@ -1,4 +1,4 @@
-interface Manufacturer {
+export interface Manufacturer {
   manufacturerId: number;
   contactPerson: string;
   contactEmail: string;
