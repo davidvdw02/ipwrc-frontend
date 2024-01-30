@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Category } from '../interfaces/category.interface';
+import { Category } from './interfaces/category.interface';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SidebarService {
+export class AppComponentService {
 
     constructor(private http: HttpClient) { }
 

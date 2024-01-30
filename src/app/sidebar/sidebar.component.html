@@ -2,14 +2,10 @@
 <div class="flex h-screen">
     <nav class="bg-gray-100 w-48 flex-shrink-0">
       <div class="p-2" *ngFor="let categorie of categories ">
-        <a routerLink="/electronics" class="block p-2  text-center hover:bg-gray-300 mt-2">
-          <i class=" text-sky-500 fas fa-laptop text-xl">{{categorie}}</i>
+        <a [routerLink]="['/products',categorie.categoryId]" class="block p-2  text-center hover:bg-gray-300 mt-2">
+          <i class=" text-sky-500 fas fa-laptop text-xl">{{categorie.categoryName}}</i>
         </a>
       </div>
     </nav>
-  
-    <div class="flex-1 p-4">
-      <router-outlet></router-outlet>
-    </div>
   </div>
   
