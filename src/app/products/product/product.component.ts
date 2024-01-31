@@ -6,10 +6,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } 
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent{
   @Input() product: any;
 
-  ngOnInit(): void {
-    console.log(this.product)
-  }
 }
