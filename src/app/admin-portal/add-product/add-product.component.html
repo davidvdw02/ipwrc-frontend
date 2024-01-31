@@ -1,0 +1,29 @@
+<form #productForm="ngForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto">
+    <div class="mb-4">
+        <label for="name" class="block mb-2">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="product.name" class="w-full px-3 py-2 border rounded">
+    </div>
+
+    <div class="mb-4">
+        <label for="description" class="block mb-2">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="product.description" class="w-full px-3 py-2 border rounded"></textarea>
+    </div>
+
+    <div class="mb-4">
+        <label for="price" class="block mb-2">Price:</label>
+        <input type="number" id="price" name="price" [(ngModel)]="product.price" class="w-full px-3 py-2 border rounded">
+    </div>
+
+    <div class="mb-4">
+        <label for="quantityInStock" class="block mb-2">Quantity in Stock:</label>
+        <input type="number" id="quantityInStock" name="quantityInStock" [(ngModel)]="product.quantityInStock" class="w-full px-3 py-2 border rounded">
+    </div>
+
+    <div class="mb-4">
+        <label for="imageUpload" class="block mb-2">Image Upload:</label>
+        <input type="file" id="imageUpload" name="imageUpload" accept=".png" (change)="onFileSelected($event)">
+        <small class="text-gray-500">Only PNG files are accepted.</small>
+    </div>
+
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Product</button>
+</form>

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AdminPortalModule } from './admin-portal/admin-portal.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppRoutingModule,
     HttpClientModule,
     ProductsModule,
+    AdminPortalModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
