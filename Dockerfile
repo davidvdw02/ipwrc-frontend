@@ -11,7 +11,7 @@ COPY . .
 
 RUN npm run build -- --prod
 
-# Stage 2: Set up Nginx and obtain SSL certificate
+# Stage 2: Set up Nginx
 FROM nginx:alpine
 
 # Copy the Nginx configuration
@@ -20,7 +20,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy the Angular app build from the previous stage
 COPY --from=build /app/dist/ipwrc-frontend /usr/share/nginx/html
 
-# Expose ports for HTTP and HTTPS
+# Expose port 80
 EXPOSE 80
 
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
