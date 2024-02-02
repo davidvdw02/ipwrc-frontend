@@ -15,7 +15,6 @@ jobs:
 
       - name: Build Angular Frontend
         run: |
-          cd ../../
           npm install
           npm run build
           docker build -t isensetoxicity/ipwrcfrontend .
