@@ -11,7 +11,7 @@ COPY . .
 
 RUN npm run build -- --prod
 
-# Stage 2: Set up Nginx
+# Stage 2: Set up Nginx and obtain SSL certificate
 FROM nginx:alpine
 
 # Copy the Nginx configuration
@@ -20,12 +20,13 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy the Angular app build from the previous stage
 COPY --from=build /app/dist/ipwrc-frontend /usr/share/nginx/html
 
+# Copy SSL certificates
+COPY /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem /etc/letsencrypt/live/plsvoldoende.nl/
+COPY /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem /etc/letsencrypt/live/plsvoldoende.nl/
+
 # Expose ports for HTTP and HTTPS
 EXPOSE 80
 EXPOSE 443
 
-# Install Certbot and Certbot Nginx plugin
-RUN apk add --no-cache certbot certbot-nginx
-
-# Start Nginx and obtain SSL certificate
-CMD ["sh", "-c", "nginx -g 'daemon off;' & certbot --nginx -n -d plsvoldoende.nl --agree-tos --email davidvdw02@gmail.com && wait"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
