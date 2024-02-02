@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { data } from 'cypress/types/jquery';
 
 @Injectable({
     providedIn: 'root'
