@@ -3,6 +3,13 @@
 
 module.exports = function (config) {
   config.set({
+    browsers: ['ChromiumHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromiumHeadlessNoSandbox: {
+        base: 'ChromiumHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
@@ -36,9 +43,8 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: true,
     restartOnFileChange: true
   });
 };

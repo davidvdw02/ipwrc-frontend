@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Build Angular App
-        run: npm run build -- --prod
+        run: npm run build
 
-      - name: Run Tests
-        run: npm run test
+      - name: Run Tests with Headless Chromium
+        run: npm run test-headless
