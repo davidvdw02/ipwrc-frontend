@@ -22,10 +22,10 @@ COPY --from=build /app/dist/ipwrc-frontend /usr/share/nginx/html
 
 # Expose ports for HTTP and HTTPS
 EXPOSE 80
-EXPOSE 443  # Expose port for SSL
+EXPOSE 443
 
 # Install Certbot
 RUN apk add --no-cache certbot
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start Nginx and obtain SSL certificate
+CMD ["sh", "-c", "nginx -g 'daemon off;' & certbot --nginx -n -d your-domain --agree-tos --email your-email && wait"]
