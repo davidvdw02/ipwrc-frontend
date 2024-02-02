@@ -39,6 +39,6 @@ jobs:
           script: |
             docker login -u isensetoxicity -p TijdelijkWachtwoord
             docker pull isensetoxicity/ipwrcfrontend:frontend
-            docker stop $(docker ps -q --filter "ancestor=isensetoxicity/ipwrcfrontend:frontend") || true
-            docker rm $(docker ps -aq --filter "ancestor=isensetoxicity/ipwrcfrontend:frontend") || true
+            docker stop ipwrcfrontend || true
+            docker rm ipwrcfrontend || true
             docker run -d -p 80:80 --name ipwrcfrontend isensetoxicity/ipwrcfrontend:frontend
