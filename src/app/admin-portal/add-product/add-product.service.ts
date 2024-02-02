@@ -12,4 +12,5 @@ export class AddProductService {
         console.log(product);
       this.http.post('http://localhost:8080/products', product).subscribe(data => console.log(data));
     }
+    //test
 }
