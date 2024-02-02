@@ -11,7 +11,7 @@ COPY . .
 
 RUN npm run build -- --prod
 
-# Stage 2: Set up Nginx and obtain SSL certificate
+# Stage 2: Set up Nginx
 FROM nginx:alpine
 
 # Copy the Nginx configuration
@@ -24,10 +24,9 @@ COPY --from=build /app/dist/ipwrc-frontend /usr/share/nginx/html
 EXPOSE 80
 EXPOSE 443
 
-# Install Certbot and obtain SSL certificate
-RUN apk --no-cache add certbot openssl && \
-    mkdir -p /var/www/html && \
-    certbot certonly --standalone --agree-tos --email davidvdw02@gmail.com -d plsvoldoende.nl
+# Copy SSL certificate files from Certbot image
+COPY --from=certbot:latest /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem /etc/nginx/certs/server.crt
+COPY --from=certbot:latest /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem /etc/nginx/certs/server.key
 
 # Start Nginx with SSL support
 CMD ["nginx", "-g", "daemon off;"]
