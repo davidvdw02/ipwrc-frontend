@@ -21,5 +21,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build Angular App
+        run: npm run build
+
       - name: Run Tests with Headless Chromium
         run: npm run test-headless
