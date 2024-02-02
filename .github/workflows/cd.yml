@@ -1,0 +1,45 @@
+name: Deploy to Hostinger VPS with Docker
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build Angular Frontend
+        run: |
+          cd ..
+          npm install
+          npm run build
+          docker build -t isensetoxicity/ipwrcfrontend .
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: isensetoxicity  
+          password: TijdelijkWachtwoord
+
+      - name: Push Angular Frontend Docker Image to Docker Hub with tag 'frontend'
+        run: |
+          docker tag isensetoxicity/ipwrcfrontend isensetoxicity/ipwrcfrontend:frontend
+          docker push isensetoxicity/ipwrcfrontend:frontend
+
+      - name: Deploy to Hostinger VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: 149.100.156.79
+          username: root
+          key: ${{ secrets.SSH }}
+          script: |
+            docker login -u isensetoxicity -p TijdelijkWachtwoord
+            docker pull isensetoxicity/ipwrcfrontend:frontend
+            docker stop ipwrcfrontend || true
+            docker rm ipwrcfrontend || true
+            docker run -d -p 80:80 --name ipwrcfrontend isensetoxicity/ipwrcfrontend:frontend
