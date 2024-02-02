@@ -22,20 +22,6 @@ COPY --from=build /app/dist/ipwrc-frontend /usr/share/nginx/html
 
 # Expose ports for HTTP and HTTPS
 EXPOSE 80
-EXPOSE 443
-
-# Install Certbot
-RUN apk --no-cache add certbot openssl
-
-# Create a temporary directory for Certbot
-WORKDIR /tmp/certbot
-
-# Obtain SSL certificate
-RUN certbot certonly --standalone --agree-tos --email davidvdw02@gmail.com -d plsvoldoende.nl
-
-# Copy SSL certificate files to Nginx
-RUN cp /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem /etc/nginx/certs/server.crt
-RUN cp /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem /etc/nginx/certs/server.key
 
 # Start Nginx with SSL support
 CMD ["nginx", "-g", "daemon off;"]
