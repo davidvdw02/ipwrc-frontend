@@ -11,7 +11,7 @@ COPY . .
 
 RUN npm run build -- --prod
 
-# Stage 2: Set up Nginx
+# Stage 2: Set up Nginx and obtain SSL certificate
 FROM nginx:alpine
 
 # Copy the Nginx configuration
