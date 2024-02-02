@@ -25,9 +25,9 @@ EXPOSE 80
 EXPOSE 443
 
 # Install Certbot and obtain SSL certificate
-RUN apk --no-cache add certbot openssl \
-    && mkdir -p /var/www/html \
-    && certbot certonly --standalone --agree-tos --email davidvdw02@gmail.com -d plsvoldoende.nl
+RUN apk --no-cache add certbot openssl && \
+    mkdir -p /var/www/html && \
+    certbot certonly --standalone --agree-tos --email davidvdw02@gmail.com -d plsvoldoende.nl
 
 # Start Nginx with SSL support
 CMD ["nginx", "-g", "daemon off;"]
