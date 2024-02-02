@@ -28,4 +28,4 @@ EXPOSE 443
 RUN apk add --no-cache certbot
 
 # Start Nginx and obtain SSL certificate
-CMD ["sh", "-c", "nginx -g 'daemon off;' & certbot --nginx -n -d plsvoldoende.nl --agree-tos --email davidvdw02@gmail.com` && wait"]
+CMD ["sh", "-c", "nginx -g 'daemon off;' & certbot --nginx -n -d plsvoldoende.nl --agree-tos --email davidvdw02@gmail.com && wait"]
