@@ -42,6 +42,7 @@ jobs:
             docker stop ipwrcfrontend || true
             docker rm ipwrcfrontend || true
             docker run -d -p 80:80 -p 443:443 \
-              -v mycerts \
-              --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
+            -v mycerts:/certs \
+            --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
+
 
