@@ -27,7 +27,7 @@ jobs:
             tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
       - name: Download SSL Certificates Tarball
-        uses: actions/download-artifact@v4.11
+        uses: actions/download-artifact@v4
         with:
           name: ssl-certificates
           path: /tmp/
