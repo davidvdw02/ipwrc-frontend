@@ -20,17 +20,19 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            # Check the SSL certificates directory on VPS
-            ls /etc/letsencrypt/live/plsvoldoende.nl
+            - name: Copy SSL Certificates from VPS to GitHub Actions runner
+              run: |
+                # Check the SSL certificates directory on VPS
+                ls /etc/letsencrypt/live/plsvoldoende.nl
 
-            # Create a tarball of the SSL certificates on VPS
-            tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
+                # Create a tarball of the SSL certificates on VPS
+                tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
-            # Copy the tarball from VPS to GitHub Actions runner
-            scp /tmp/ssl-certificates.tar.gz ${{ github.actor }}@${{ runner.hostname }}:/home/runner/work/ipwrc-frontend/ipwrc-frontend/
+                # Copy the tarball from VPS to GitHub Actions runner
+                scp root@149.100.156.79:/tmp/ssl-certificates.tar.gz /home/runner/work/ipwrc-frontend/ipwrc-frontend/
 
-            # Extract SSL Certificates on GitHub Actions runner
-            tar -zxvf /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates.tar.gz -C /home/runner/work/ipwrc-frontend/ipwrc-frontend/
+                # Extract SSL Certificates on GitHub Actions runner
+                tar -zxvf /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates.tar.gz -C /home/runner/work/ipwrc-frontend/ipwrc-frontend/
 
       - name: Build Angular Frontend
         run: |
