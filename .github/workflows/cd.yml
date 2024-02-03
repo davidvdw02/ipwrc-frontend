@@ -20,8 +20,8 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            mkdir -p /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates
-            scp -r /etc/letsencrypt/live/plsvoldoende.nl/* /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates/
+            mkdir -p $GITHUB_WORKSPACE/ssl-certificates
+            scp -r /etc/letsencrypt/live/plsvoldoende.nl/* $GITHUB_WORKSPACE/ssl-certificates/
 
       - name: Check SSL Certificates Directory
         run: |
