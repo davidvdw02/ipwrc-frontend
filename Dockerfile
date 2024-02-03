@@ -21,8 +21,8 @@ RUN apk add --no-cache openssh-client
 RUN mkdir -p /etc/letsencrypt/live/plsvoldoende.nl/
 
 # Copy SSL certificates from GitHub Actions workspace during the build
-COPY fullchain.pem /etc/letsencrypt/live/plsvoldoende.nl/
-COPY privkey.pem /etc/letsencrypt/live/plsvoldoende.nl/
+COPY ssl-certificates/fullchain.pem /etc/letsencrypt/live/plsvoldoende.nl/
+COPY ssl-certificates/privkey.pem /etc/letsencrypt/live/plsvoldoende.nl/
 
 # Copy the Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
