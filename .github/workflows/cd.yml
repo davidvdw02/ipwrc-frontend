@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Copy SSL Certificates from VPS to GitHub Pipeline
+      - name: Copy SSL Certificates from VPS to GitHub Release
         uses: appleboy/ssh-action@master
         with:
           host: 149.100.156.79
@@ -23,14 +23,15 @@ jobs:
             # Create a tarball of the SSL certificates
             tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
-            # Upload the tarball as an artifact
-            echo "::set-output name=artifact_path::/tmp/ssl-certificates.tar.gz"
+            # Upload the tarball as a release asset
+            gh release create "$GITHUB_RUN_ID" /tmp/ssl-certificates.tar.gz -t "SSL Certificates" -n "SSL Certificates for $GITHUB_RUN_ID"
 
-      - name: Download SSL Certificates from VPS
-        uses: actions/download-artifact@v2
-        with:
-          name: ssl-certificates
-          path: ${{ github.workspace }}/ssl-certificates
+      - name: Download SSL Certificates from GitHub Release
+        run: |
+          asset_url=$(gh release view "$GITHUB_RUN_ID" --json assets[0].browser_download_url -q .)
+          curl -L -o ssl-certificates.tar.gz "$asset_url"
+          mkdir -p ssl-certificates
+          tar -xzf ssl-certificates.tar.gz -C ssl-certificates
 
       - name: Check SSL Certificates Directory
         run: |
