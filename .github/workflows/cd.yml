@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH }}
           script: |
             # Copy SSL certificates from VPS to GitHub Pipeline
-            scp -r /etc/letsencrypt/live/plsvoldoende.nl/. ./ssl-certificates
+            scp -r /etc/letsencrypt/live/plsvoldoende.nl/* ./ssl-certificates
 
       - name: Build Angular Frontend
         run: |
