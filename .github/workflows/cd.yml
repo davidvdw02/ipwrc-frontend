@@ -13,6 +13,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Copy SSL Certificates from VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: 149.100.156.79
+          username: root
+          key: ${{ secrets.SSH }}
+          script: |
+            scp user@your-vps:/etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem .
+            scp user@your-vps:/etc/letsencrypt/live/plsvoldoende.nl/privkey.pem .
+
       - name: Build Angular Frontend
         run: |
           npm install
@@ -24,16 +34,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASS }}
-
-      - name: Copy SSL Certificates from VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: 149.100.156.79
-          username: root
-          key: ${{ secrets.SSH }}
-          script: |
-            # No need for explicit scp commands
-            # The necessary SSL certificates are assumed to be in the expected location on the VPS
 
       - name: Build Docker Image with SSL Certificates
         run: |
