@@ -31,6 +31,7 @@ export class AddProductComponent implements OnInit {
         this.product.image = reader.result as string;
       };
       reader.readAsDataURL(file);
+      //test
   }
 
 }
