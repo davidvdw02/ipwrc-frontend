@@ -42,11 +42,5 @@ jobs:
             docker stop ipwrcfrontend || true
             docker rm ipwrcfrontend || true
             docker run -d -p 80:80 -p 443:443 \
-              -v mycerts:/certs \
-              -v /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem:/certs/fullchain.pem \
-              -v /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem:/certs/privkey.pem \
+              -v /project/certs:/certs \
               --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
-
-
-
-
