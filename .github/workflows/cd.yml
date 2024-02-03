@@ -20,15 +20,17 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            echo ${RUNNER_IP}
-            # Check the SSL certificates directory
+            # Check the SSL certificates directory on VPS
             ls /etc/letsencrypt/live/plsvoldoende.nl
 
-            # Create a tarball of the SSL certificates
+            # Create a tarball of the SSL certificates on VPS
             tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
-            RUNNER_IP=$(curl -s "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs" | jq -r '.jobs[0].runner.url' | cut -d'/' -f3)
-            scp /tmp/ssl-certificates.tar.gz ${{ github.actor }}@${RUNNER_IP}:/home/runner/work/ipwrc-frontend/ipwrc-frontend/
+            # Copy the tarball from VPS to GitHub Actions runner
+            scp /tmp/ssl-certificates.tar.gz ${{ github.actor }}@${{ runner.hostname }}:/home/runner/work/ipwrc-frontend/ipwrc-frontend/
+
+            # Extract SSL Certificates on GitHub Actions runner
+            tar -zxvf /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates.tar.gz -C /home/runner/work/ipwrc-frontend/ipwrc-frontend/
 
       - name: Build Angular Frontend
         run: |
