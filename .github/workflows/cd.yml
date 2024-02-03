@@ -14,14 +14,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Copy SSL Certificates from VPS
-        uses: appleboy/ssh-action@master
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: 149.100.156.79
           username: root
           key: ${{ secrets.SSH }}
-          script: |
-            scp /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem .
-            scp /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem .
+          source: /etc/letsencrypt/live/plsvoldoende.nl/
+          target: .
 
       - name: Debugging
         run: |
