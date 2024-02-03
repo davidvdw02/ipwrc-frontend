@@ -23,6 +23,10 @@ jobs:
             # Copy SSL certificates from VPS to GitHub Pipeline
             scp -r /etc/letsencrypt/live/plsvoldoende.nl/* ./ssl-certificates
 
+      - name: List SSL Certificates in GitHub Pipeline
+        run: |
+          ls -R ./ssl-certificates
+
       - name: Build Angular Frontend
         run: |
           npm install
