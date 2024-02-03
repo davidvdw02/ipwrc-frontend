@@ -14,15 +14,18 @@ RUN npm run build -- --prod
 # Stage 2: Set up Nginx and obtain SSL certificate
 FROM nginx:alpine
 
+# Install SCP (Secure Copy)
+RUN apk add --no-cache openssh-client
+
+# Copy SSL certificates from VPS using SCP
+COPY /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem /etc/letsencrypt/live/plsvoldoende.nl/
+COPY /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem /etc/letsencrypt/live/plsvoldoende.nl/
+
 # Copy the Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the Angular app build from the previous stage
 COPY --from=build /app/dist/ipwrc-frontend /usr/share/nginx/html
-
-# Copy SSL certificates
-COPY /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem /etc/letsencrypt/live/plsvoldoende.nl/
-COPY /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem /etc/letsencrypt/live/plsvoldoende.nl/
 
 # Expose ports for HTTP and HTTPS
 EXPOSE 80
