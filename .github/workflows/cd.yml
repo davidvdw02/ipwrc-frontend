@@ -20,8 +20,8 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            scp root@149.100.156.79:/etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem .
-            scp root@149.100.156.79:/etc/letsencrypt/live/plsvoldoende.nl/privkey.pem .
+            scp /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem .
+            scp /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem .
 
       - name: Build Angular Frontend
         run: |
