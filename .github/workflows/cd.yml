@@ -20,13 +20,22 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            mkdir -p $GITHUB_WORKSPACE/ssl-certificates
-            scp -r /etc/letsencrypt/live/plsvoldoende.nl/* $GITHUB_WORKSPACE/ssl-certificates/
+            # Create a tarball of the SSL certificates
+            tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
+
+            # Upload the tarball as an artifact
+            echo "::set-output name=artifact_path::/tmp/ssl-certificates.tar.gz"
+
+      - name: Download SSL Certificates from VPS
+        uses: actions/download-artifact@v2
+        with:
+          name: ssl-certificates
+          path: ${{ github.workspace }}/ssl-certificates
 
       - name: Check SSL Certificates Directory
         run: |
           echo "SSL Certificates Directory Path: $(pwd)/ssl-certificates"
-          ls /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates
+          ls -R ./ssl-certificates
 
       - name: Build Angular Frontend
         run: |
