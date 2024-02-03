@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -21,7 +20,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           source: /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem
-          target: ./
+          target: ./fullchain.pem
 
       - name: Debugging
         run: |
