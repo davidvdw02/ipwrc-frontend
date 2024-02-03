@@ -23,6 +23,11 @@ jobs:
             mkdir -p ssl-certificates
             scp -r /etc/letsencrypt/live/plsvoldoende.nl/* ./ssl-certificates/
 
+      - name: Check SSL Certificates Directory
+        run: |
+          echo "SSL Certificates Directory Path: $(pwd)/ssl-certificates"
+          ls -R ./ssl-certificates
+
       - name: Build Angular Frontend
         run: |
           npm install
