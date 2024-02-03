@@ -22,7 +22,6 @@ jobs:
           script: |
             mkdir -p ssl-certificates
             scp -r /etc/letsencrypt/live/plsvoldoende.nl/* ./ssl-certificates/
-            ls -R ./ssl-certificates
 
       - name: Build Angular Frontend
         run: |
