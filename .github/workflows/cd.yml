@@ -13,14 +13,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Copy SSL Certificates from VPS
-        uses: appleboy/scp-action@v0.1.7
+      - name: Copy SSL Certificates from VPS to GitHub Pipeline
+        uses: appleboy/ssh-action@master
         with:
           host: 149.100.156.79
           username: root
           key: ${{ secrets.SSH }}
-          source: .
-          target: '/etc/letsencrypt/live/plsvoldoende.nl'
+          script: |
+            # Copy SSL certificates from VPS to GitHub Pipeline
+            scp /etc/letsencrypt/live/plsvoldoende.nl/. ./ssl-certificates
 
       - name: Build Angular Frontend
         run: |
