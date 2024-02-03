@@ -26,11 +26,8 @@ jobs:
             # Create a tarball of the SSL certificates
             tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
-      - name: Download SSL Certificates Tarball
-        uses: actions/download-artifact@v4
-        with:
-          name: ssl-certificates
-          path: /tmp/
+            # Copy the tarball to the GitHub Actions workspace
+            scp /tmp/ssl-certificates.tar.gz ${{ github.actor }}@${{ github.run_id }}-default-ubuntu-20.04:/home/runner/work/ipwrc-frontend/ipwrc-frontend/
 
       - name: Build Angular Frontend
         run: |
@@ -56,9 +53,6 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            # Extract the downloaded tarball
-            tar -xzf /tmp/ssl-certificates.tar.gz -C /github/workspace/
-
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASS }}
             docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl
             docker stop ipwrcfrontend || true
