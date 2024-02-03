@@ -13,9 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install jq
-        run: sudo apt-get install jq -y
-        
       - name: Copy SSL Certificates from VPS to GitHub Pipeline
         uses: appleboy/ssh-action@master
         with:
