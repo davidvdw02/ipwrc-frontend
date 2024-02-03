@@ -23,15 +23,20 @@ jobs:
             # Create a tarball of the SSL certificates
             tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
-            # Upload the tarball as a release asset
-            gh release create "$GITHUB_RUN_ID" /tmp/ssl-certificates.tar.gz -t "SSL Certificates" -n "SSL Certificates for $GITHUB_RUN_ID"
+      - name: Upload SSL Certificates as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ssl-certificates
+          path: /tmp/ssl-certificates.tar.gz
 
-      - name: Download SSL Certificates from GitHub Release
+      - name: Download SSL Certificates Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: ssl-certificates
+
+      - name: Extract SSL Certificates
         run: |
-          asset_url=$(gh release view "$GITHUB_RUN_ID" --json assets[0].browser_download_url -q .)
-          curl -L -o ssl-certificates.tar.gz "$asset_url"
-          mkdir -p ssl-certificates
-          tar -xzf ssl-certificates.tar.gz -C ssl-certificates
+          tar -xzf ssl-certificates/ssl-certificates.tar.gz -C ssl-certificates
 
       - name: Check SSL Certificates Directory
         run: |
@@ -63,7 +68,4 @@ jobs:
           key: ${{ secrets.SSH }}
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASS }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl
-            docker stop ipwrcfrontend || true
-            docker rm ipwrcfrontend || true
-            docker run -d -p 80:80 -p 443:443 --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl
+            docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend
