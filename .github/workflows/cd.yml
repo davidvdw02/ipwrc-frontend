@@ -26,8 +26,8 @@ jobs:
             # Create a tarball of the SSL certificates
             tar -czf /tmp/ssl-certificates.tar.gz -C /etc/letsencrypt/live/plsvoldoende.nl .
 
-            # Copy the tarball to the GitHub Actions workspace
-            scp /tmp/ssl-certificates.tar.gz ${{ github.actor }}@${{ github.run_id }}-default-ubuntu-20.04:/home/runner/work/ipwrc-frontend/ipwrc-frontend/
+            RUNNER_IP=$(curl -s "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs" | jq -r '.jobs[0].runner.url' | cut -d'/' -f3)
+            scp /tmp/ssl-certificates.tar.gz ${{ github.actor }}@${RUNNER_IP}:/home/runner/work/ipwrc-frontend/ipwrc-frontend/
 
       - name: Build Angular Frontend
         run: |
