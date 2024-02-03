@@ -19,8 +19,8 @@ jobs:
           host: 149.100.156.79
           username: root
           key: ${{ secrets.SSH }}
-          source: ./ssl-certificates
-          target: /etc/letsencrypt/live/plsvoldoende.nl/
+          source: /etc/letsencrypt/live/plsvoldoende.nl/*
+          target: ./ssl-certificates
 
       - name: Build Angular Frontend
         run: |
