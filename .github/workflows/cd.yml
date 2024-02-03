@@ -23,6 +23,13 @@ jobs:
             scp /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem .
             scp /etc/letsencrypt/live/plsvoldoende.nl/privkey.pem .
 
+        - name: Debugging
+          run: |
+            ls -l
+            cat fullchain.pem
+            cat privkey.pem
+
+
       - name: Build Angular Frontend
         run: |
           npm install
