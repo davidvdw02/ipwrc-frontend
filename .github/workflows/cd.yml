@@ -20,6 +20,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
+            echo ${RUNNER_IP}
             # Check the SSL certificates directory
             ls /etc/letsencrypt/live/plsvoldoende.nl
 
