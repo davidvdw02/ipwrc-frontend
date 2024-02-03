@@ -19,8 +19,8 @@ jobs:
           host: 149.100.156.79
           username: root
           key: ${{ secrets.SSH }}
-          source: '/etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem'
-          target: '/home/runner/work/ipwrc-frontend/ipwrc-frontend'
+          source: .
+          target: '/etc/letsencrypt/live/plsvoldoende.nl'
 
       - name: Debugging
         run: |
