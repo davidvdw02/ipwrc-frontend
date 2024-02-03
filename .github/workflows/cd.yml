@@ -20,12 +20,8 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            mkdir -p ssl-certificates
-            scp -r /etc/letsencrypt/live/plsvoldoende.nl/* ./ssl-certificates/
-            echo "SSL Certificates Directory Path: $(pwd)/ssl-certificates"
-
-      - name: Checkout
-        uses: actions/checkout@v2
+            mkdir -p /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates
+            scp -r /etc/letsencrypt/live/plsvoldoende.nl/* /home/runner/work/ipwrc-frontend/ipwrc-frontend/ssl-certificates/
 
       - name: Check SSL Certificates Directory
         run: |
