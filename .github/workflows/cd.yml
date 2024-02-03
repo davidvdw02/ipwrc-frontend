@@ -44,5 +44,5 @@ jobs:
             docker run -d -p 80:80 \
               -e ssl_cert_path=/etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem \
               -e ssl_key_path=/etc/letsencrypt/live/plsvoldoende.nl/privkey.pem \
-              -v /etc/letsencrypt/live/plsvoldoende.nl/:/etc/letsencrypt/live/plsvoldoende.nl/ \
+              -v /path/to/local/certificates:/etc/letsencrypt/live/plsvoldoende.nl/ \
               --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
