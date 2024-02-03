@@ -41,4 +41,5 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
             docker stop ipwrcfrontend || true
             docker rm ipwrcfrontend || true
-            docker run -d -p 80:80 --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
+            docker run -d -p 80:80 -v /etc/letsencrypt/live/plsvoldoende.nl/:/etc/letsencrypt/live/plsvoldoende.nl/ --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
+
