@@ -22,12 +22,6 @@ jobs:
           source: .
           target: '/etc/letsencrypt/live/plsvoldoende.nl'
 
-      - name: Debugging
-        run: |
-          ls -l
-          cat fullchain.pem
-          cat privkey.pem
-
       - name: Build Angular Frontend
         run: |
           npm install
