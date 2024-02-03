@@ -20,7 +20,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           source: /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem
-          target: ./fullchain.pem
+          target: /home/runner/work/ipwrc-frontend/ipwrc-frontend
 
       - name: Debugging
         run: |
