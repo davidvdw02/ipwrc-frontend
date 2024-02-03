@@ -1,7 +1,7 @@
 name: Deploy to Hostinger VPS with Docker
 
 on:
-  pull_request:
+  push:
     branches:
       - master
 
