@@ -13,23 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Build Angular Frontend
-        run: |
-          npm install
-          npm run build -- --prod
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend .
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASS }}
-
-      - name: Push Angular Frontend Docker Image to Docker Hub with tag 'frontend'
-        run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:frontend
-          docker push ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:frontend
-
       - name: Deploy to Hostinger VPS
         uses: appleboy/ssh-action@master
         with:
@@ -37,8 +20,20 @@ jobs:
           username: root
           key: ${{ secrets.SSH }}
           script: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASS }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:frontend
-            docker stop ipwrcfrontend || true
-            docker rm ipwrcfrontend || true
-            docker run -d -p 80:80 -p 443:443 --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:frontend
+            # Update your Angular app on VPS
+            cd /path/to/your/angular/app
+            git pull origin master
+
+            # Build Angular Frontend on VPS
+            npm install
+            npm run build -- --prod
+
+            # Build Docker Image on VPS
+            docker build -t your-docker-image-name .
+
+            # Stop and remove existing container (if any)
+            docker stop your-container-name || true
+            docker rm your-container-name || true
+
+            # Run Docker container on VPS
+            docker run -d -p 80:80 -p 443:443 --name your-container-name your-docker-image-name
