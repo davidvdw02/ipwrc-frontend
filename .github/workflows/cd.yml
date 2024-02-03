@@ -22,6 +22,7 @@ jobs:
           script: |
             mkdir -p ssl-certificates
             scp -r /etc/letsencrypt/live/plsvoldoende.nl/* ./ssl-certificates/
+            echo "SSL Certificates Directory Path: $(pwd)/ssl-certificates"
 
       - name: Checkout
         uses: actions/checkout@v2
