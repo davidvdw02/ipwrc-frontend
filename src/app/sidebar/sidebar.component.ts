@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Category } from '../interfaces/category.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,5 +10,9 @@ import { Category } from '../interfaces/category.interface';
 export class SidebarComponent {
    @Input() categories: Category[] = [];
 
+  constructor(private router:Router) { }
 
+  goToAdminPortal(){
+    this.router.navigate(['/admin']);
+  }
 }
