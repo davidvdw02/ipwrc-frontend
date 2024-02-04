@@ -13,21 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Copy SSL Certificates from VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: 149.100.156.79
-          username: root
-          key: ${{ secrets.SSH }}
-          source: /etc/letsencrypt/live/plsvoldoende.nl/fullchain.pem
-          target: ./fullchain.pem
-
-      - name: Debugging
-        run: |
-          ls -l
-          cat fullchain.pem
-          cat privkey.pem
-
       - name: Build Angular Frontend
         run: |
           npm install
@@ -40,10 +25,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASS }}
 
-      - name: Build Docker Image with SSL Certificates
+      - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl .
-          docker push ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
 
       - name: Deploy to Hostinger VPS
         uses: appleboy/ssh-action@master
@@ -53,7 +38,9 @@ jobs:
           key: ${{ secrets.SSH }}
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASS }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl
+            docker pull ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
             docker stop ipwrcfrontend || true
             docker rm ipwrcfrontend || true
-            docker run -d -p 80:80 -p 443:443 --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:with-ssl
+            docker run -d -p 80:80 -p 443:443 \
+              -v /project/certs:/certs \
+              --name ipwrcfrontend ${{ secrets.DOCKER_USERNAME }}/ipwrcfrontend:latest
