@@ -1,3 +1,5 @@
+import { Category } from "./category.interface";
+
 export interface Product {
     productId: number;
     name: string;
@@ -7,4 +9,5 @@ export interface Product {
     imageUrl: string;
     available: boolean;
     averageRating: number;
+    category: Category;
   }
