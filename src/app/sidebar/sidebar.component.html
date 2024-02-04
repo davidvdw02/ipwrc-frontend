@@ -1,9 +1,10 @@
 <div class="flex h-screen">
     <nav class="bg-gray-100 w-48 flex-shrink-0">
       <div class="p-2" *ngFor="let categorie of categories ">
-        <a [routerLink]="['/products',categorie.categoryId]" class="block p-2  text-center hover:bg-gray-300 mt-2">
-          <i class=" text-sky-500 fas fa-laptop text-xl">{{categorie.categoryName}}</i>
-        </a>
+<a [routerLink]="['/user', 'product', categorie.categoryId]" class="block p-2 text-center hover:bg-gray-300 mt-2">
+  <i class="text-sky-500 fas fa-laptop text-xl">{{categorie.categoryName}}</i>
+</a>
+
       </div>
     </nav>
     <button (click)="goToAdminPortal()" class="fixed bottom-4 left-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Go to Admin Page</button>

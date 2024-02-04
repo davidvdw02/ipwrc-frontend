@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPortalComponent } from './admin-portal/admin-portal.component';
-import { UserPortalComponent } from './user-portal/user-portal.component';
 
-const routes: Routes = [{path:'products/:id', component: UserPortalComponent},{path:'products', component: UserPortalComponent},{path:'admin', component: AdminPortalComponent}];
+const routes: Routes = [
+  { path: 'admin', component: AdminPortalComponent },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./user-portal/user-portal.module').then((m) => m.UserPortalModule),
+  },
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
