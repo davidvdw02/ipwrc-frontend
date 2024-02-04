@@ -5,22 +5,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   categories: Category[] = [];
-  constructor(private appComponentService: AppComponentService, private router: Router) { }
+  constructor(
+    private appComponentService: AppComponentService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.appComponentService.getAllCategories().subscribe(data => {
+    this.appComponentService.getAllCategories().subscribe((data) => {
       this.categories = data;
     });
   }
 
   shouldHideSidebar(): boolean {
-    return !(this.router.url ==='/admin');
+    return !(this.router.url === '/admin');
   }
-
-
-
 }

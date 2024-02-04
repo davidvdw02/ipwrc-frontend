@@ -8,21 +8,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 import { RouterModule } from '@angular/router';
 
-
-
 @NgModule({
   declarations: [
     AdminPortalComponent,
     AddProductComponent,
     AddCategoryDialogComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatDialogModule,
-    RouterModule,
-  ],
-  exports:[AdminPortalComponent]
+  imports: [CommonModule, FormsModule, MatDialogModule, RouterModule],
+  exports: [AdminPortalComponent],
 })
-export class AdminPortalModule { }
+export class AdminPortalModule {}

@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-deleteproduct',
   templateUrl: './delete-product.component.html',
-  styleUrls: ['./delete-product.component.scss']
+  styleUrls: ['./delete-product.component.scss'],
 })
 export class DeleteProductComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

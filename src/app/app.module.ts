@@ -10,10 +10,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserPortalModule } from './user-portal/user-portal.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidebarComponent,
-  ],
+  declarations: [AppComponent, SidebarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +20,6 @@ import { UserPortalModule } from './user-portal/user-portal.module';
     UserPortalModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

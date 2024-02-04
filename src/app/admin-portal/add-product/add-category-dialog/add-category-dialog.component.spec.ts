@@ -8,9 +8,8 @@ describe('AddCategoryDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddCategoryDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AddCategoryDialogComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
