@@ -5,6 +5,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { AddCategoryDialogComponent } from './add-product/add-category-dialog/add-category-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -12,12 +14,14 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     AdminPortalComponent,
     AddProductComponent,
-    AddCategoryDialogComponent
+    AddCategoryDialogComponent,
+    DeleteProductComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MatDialogModule,
+    RouterModule,
   ],
   exports:[AdminPortalComponent]
 })

@@ -11,8 +11,4 @@ export class SidebarComponent {
    @Input() categories: Category[] = [];
 
   constructor(private router:Router) { }
-
-  goToAdminPortal(){
-    this.router.navigate(['/admin']);
-  }
 }

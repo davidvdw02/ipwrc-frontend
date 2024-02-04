@@ -8,12 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AdminPortalComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-  goBackTOWebshop(){
-    this.router.navigate(['/products']);
-  }
-
 }
