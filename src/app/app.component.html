@@ -1,7 +1,6 @@
 <div class="flex">
-    <app-sidebar [categories]="categories"></app-sidebar>
+    <app-sidebar *ngIf="shouldHideSidebar()" [categories]="categories"></app-sidebar>
     <div class="flex-1 p-4">
       <router-outlet></router-outlet>
     </div>
   </div>
-  

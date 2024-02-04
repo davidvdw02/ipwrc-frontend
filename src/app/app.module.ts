@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './products/products.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdminPortalModule } from './admin-portal/admin-portal.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AdminPortalModule } from './admin-portal/admin-portal.module';
     HttpClientModule,
     ProductsModule,
     AdminPortalModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
