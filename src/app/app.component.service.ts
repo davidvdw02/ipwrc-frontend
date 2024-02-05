@@ -5,14 +5,13 @@ import { Category } from './interfaces/category.interface';
 import { environment } from './../environments/environment';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppComponentService {
+  private apiUrl = environment.apiUrl;
+  constructor(private http: HttpClient) {}
 
-    private apiUrl = environment.apiUrl;
-    constructor(private http: HttpClient) { }
-
-    getAllCategories(): Observable<Category[]> {
-        return this.http.get<Category[]>(this.apiUrl+'categories');
-    }
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiUrl + 'categories');
+  }
 }
