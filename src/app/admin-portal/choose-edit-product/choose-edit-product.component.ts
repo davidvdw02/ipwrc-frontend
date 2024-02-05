@@ -8,7 +8,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 @Component({
   selector: 'app-choose-edit-product',
   templateUrl: './choose-edit-product.component.html',
-  styleUrls: ['./choose-edit-product.component.scss']
+  styleUrls: ['./choose-edit-product.component.scss'],
 })
 export class ChooseEditProductComponent implements OnInit {
   products: Product[] = [];
@@ -16,7 +16,10 @@ export class ChooseEditProductComponent implements OnInit {
   filteredProducts: Product[] = [];
   selectedProduct: Product | null = null;
 
-  constructor(private chooseEditProductService: ChooseEditProductService, private dialog: MatDialog) { }
+  constructor(
+    private chooseEditProductService: ChooseEditProductService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.chooseEditProductService.getAllProducts().subscribe((data: any) => {
@@ -30,8 +33,11 @@ export class ChooseEditProductComponent implements OnInit {
 
   applyFilter(event: any) {
     this.filteredProducts = this.products.filter((product: Product) => {
-      return product.name.toLowerCase().includes(event.target.value.toLowerCase())});
-    }
+      return product.name
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase());
+    });
+  }
 
   openEditProductPopup(product: Product): void {
     const dialogRef = this.dialog.open(EditProductComponent, {
@@ -42,9 +48,12 @@ export class ChooseEditProductComponent implements OnInit {
       },
     });
 
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.chooseEditProductService.updateProduct(result).subscribe((data: any) => {console.log(data)})
+    dialogRef.afterClosed().subscribe((result) => {
+      this.chooseEditProductService
+        .updateProduct(result)
+        .subscribe((data: any) => {
+          console.log(data);
+        });
     });
   }
 }

@@ -6,26 +6,28 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.scss']
+  styleUrls: ['./edit-product.component.scss'],
 })
 export class EditProductComponent implements OnInit {
- selectedProduct: Product
-  allCategories: Category[] = []
-  categories: Category[] = []
-  constructor(public dialogRef: MatDialogRef<EditProductComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.selectedProduct = data.selectedProduct;
-      this.allCategories = data.categories;
-      this.oncategoryChange();
-    }
-
-  ngOnInit(): void {
+  selectedProduct: Product;
+  allCategories: Category[] = [];
+  categories: Category[] = [];
+  constructor(
+    public dialogRef: MatDialogRef<EditProductComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.selectedProduct = data.selectedProduct;
+    this.allCategories = data.categories;
+    this.oncategoryChange();
   }
+
+  ngOnInit(): void {}
   oncategoryChange() {
-    this.categories = this.allCategories.filter((category: Category) => category.categoryId !== this.selectedProduct.category.categoryId);
+    this.categories = this.allCategories.filter(
+      (category: Category) =>
+        category.categoryId !== this.selectedProduct.category.categoryId
+    );
   }
-
-
 
   onEditSubmit() {
     // Add logic to handle the submission of edits to an existing product
@@ -38,8 +40,8 @@ export class EditProductComponent implements OnInit {
   }
   onCancel() {
     this.dialogRef.close();
-    }
-    onSave() {
-      this.dialogRef.close(this.selectedProduct);
-    }
+  }
+  onSave() {
+    this.dialogRef.close(this.selectedProduct);
+  }
 }

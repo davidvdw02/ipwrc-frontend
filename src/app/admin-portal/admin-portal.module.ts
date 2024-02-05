@@ -18,7 +18,13 @@ import { ChooseEditProductComponent } from './choose-edit-product/choose-edit-pr
     EditProductComponent,
     ChooseEditProductComponent,
   ],
-  imports: [CommonModule, FormsModule, MatDialogModule, RouterModule, MatInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    RouterModule,
+    MatInputModule,
+  ],
   exports: [AdminPortalComponent],
 })
 export class AdminPortalModule {}

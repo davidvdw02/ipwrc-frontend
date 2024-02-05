@@ -1,7 +1,10 @@
 <div class="text-center font-bold text-2xl mb-4">Edit Product</div>
 
-<form #editProductForm="ngForm" (ngSubmit)="onEditSubmit()" class="max-w-md mx-auto">
-
+<form
+  #editProductForm="ngForm"
+  (ngSubmit)="onEditSubmit()"
+  class="max-w-md mx-auto"
+>
   <div *ngIf="selectedProduct" class="mb-2">
     <label for="editProductName" class="block mb-1">Product Name:</label>
     <input
@@ -23,8 +26,12 @@
       required
       (ngModelChange)="oncategoryChange()"
     >
-    <option [ngValue]="selectedProduct.category">{{selectedProduct.category.categoryName}}</option>
-      <option *ngFor="let category of categories" [ngValue]="category">{{ category.categoryName }}</option>
+      <option [ngValue]="selectedProduct.category">
+        {{ selectedProduct.category.categoryName }}
+      </option>
+      <option *ngFor="let category of categories" [ngValue]="category">
+        {{ category.categoryName }}
+      </option>
     </select>
   </div>
   <div *ngIf="selectedProduct" class="mb-2">
@@ -38,7 +45,6 @@
     ></textarea>
   </div>
 
-
   <div *ngIf="selectedProduct" class="mb-2">
     <label for="editPrice" class="block mb-1">Price:</label>
     <input
@@ -51,9 +57,10 @@
     />
   </div>
 
-
   <div *ngIf="selectedProduct" class="mb-2">
-    <label for="editQuantityInStock" class="block mb-1">Quantity in Stock:</label>
+    <label for="editQuantityInStock" class="block mb-1"
+      >Quantity in Stock:</label
+    >
     <input
       type="number"
       id="editQuantityInStock"
@@ -77,10 +84,10 @@
     <small class="text-gray-500 inline">Only PNG files are accepted.</small>
 
     <img
-    class="w-64 h-auto object-contain mx-0 mb-2"
-    src="{{ selectedProduct.imageUrl }}"
-    alt="{{ selectedProduct.name }}"
-  />
+      class="w-64 h-auto object-contain mx-0 mb-2"
+      src="{{ selectedProduct.imageUrl }}"
+      alt="{{ selectedProduct.name }}"
+    />
   </div>
 
   <div class="flex justify-between items-center mt-4">

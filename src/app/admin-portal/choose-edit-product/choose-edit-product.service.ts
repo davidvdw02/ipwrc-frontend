@@ -4,21 +4,23 @@ import { Product } from 'src/app/interfaces/product.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChooseEditProductService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-
-  getAllProducts(){
+  getAllProducts() {
     return this.http.get(this.apiUrl + 'products');
   }
-  updateProduct(product: Product){
-    return this.http.put(this.apiUrl + 'products/' + product.productId, product);
+  updateProduct(product: Product) {
+    return this.http.put(
+      this.apiUrl + 'products/' + product.productId,
+      product
+    );
   }
-  getAllCategories(){
+  getAllCategories() {
     return this.http.get(this.apiUrl + 'categories');
   }
 }
