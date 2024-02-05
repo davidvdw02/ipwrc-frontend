@@ -5,17 +5,20 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { AddCategoryDialogComponent } from './add-product/add-category-dialog/add-category-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { EditProductComponent } from './choose-edit-product/edit-product/edit-product.component';
+import { ChooseEditProductComponent } from './choose-edit-product/choose-edit-product.component';
 
 @NgModule({
   declarations: [
     AdminPortalComponent,
     AddProductComponent,
     AddCategoryDialogComponent,
-    DeleteProductComponent,
+    EditProductComponent,
+    ChooseEditProductComponent,
   ],
-  imports: [CommonModule, FormsModule, MatDialogModule, RouterModule],
+  imports: [CommonModule, FormsModule, MatDialogModule, RouterModule, MatInputModule],
   exports: [AdminPortalComponent],
 })
 export class AdminPortalModule {}
