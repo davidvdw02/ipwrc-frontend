@@ -7,11 +7,13 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () =>
-      import('./user-portal/user-portal.module').then((m) => m.UserPortalModule),
+      import('./user-portal/user-portal.module').then(
+        (m) => m.UserPortalModule
+      ),
   },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

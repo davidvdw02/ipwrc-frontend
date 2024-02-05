@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddCategoryDialogComponent } from './add-category-dialog.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 describe('AddCategoryDialogComponent', () => {
   let component: AddCategoryDialogComponent;
@@ -8,9 +8,12 @@ describe('AddCategoryDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddCategoryDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AddCategoryDialogComponent],
+      imports: [MatDialogModule], // Import MatDialogModule
+      providers: [
+        { provide: MatDialogRef, useValue: {} }, // Provide a mock MatDialogRef
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

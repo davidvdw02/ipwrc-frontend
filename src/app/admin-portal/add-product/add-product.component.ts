@@ -14,28 +14,34 @@ export const SELECT_A_CATEGORY: Category = {
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  styleUrls: ['./add-product.component.scss'],
 })
-
 export class AddProductComponent implements OnInit {
-  product: AddProductInterface = { name: '', description: '', price: 0, quantityInStock: 0, image: '', category: { categoryName: 'Select Category' }};
+  product: AddProductInterface = {
+    name: '',
+    description: '',
+    price: 0,
+    quantityInStock: 0,
+    image: '',
+    category: { categoryName: 'Select Category' },
+  };
   categories: any = [];
 
-
-  constructor(private addProductService: AddProductService,private dialog: MatDialog) {
-  }
+  constructor(
+    private addProductService: AddProductService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.addProductService.onCategorySave$.subscribe(data => {
+    this.addProductService.onCategorySave$.subscribe((data) => {
       this.categories.push(data);
       this.product.category = data;
     });
     this.getAllCategories();
-
   }
 
   onCategoryChange() {
-    if(this.product.category.categoryId == undefined){
+    if (this.product.category.categoryId == undefined) {
       this.handleAddCategoryDIalog();
     }
   }
@@ -52,26 +58,28 @@ export class AddProductComponent implements OnInit {
         this.product.image = reader.result as string;
       };
       reader.readAsDataURL(file);
-  }
-}
-handleAddCategoryDIalog(){
-  const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
-    width: '400px',
-  });
-  dialogRef.afterClosed().subscribe(data =>{
-    if(data != undefined){
-      this.addProductService.addCategories({categoryName: data});
-        return
     }
-    this.product.category = SELECT_A_CATEGORY;
-  });
-}
+  }
+  handleAddCategoryDIalog() {
+    const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
+      width: '400px',
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data != undefined) {
+        this.addProductService.addCategories({ categoryName: data });
+        return;
+      }
+      this.product.category = SELECT_A_CATEGORY;
+    });
+  }
 
-getAllCategories(){
-  this.addProductService.getAllCategories().subscribe(data => this.handleCategories(data));
-}
-handleCategories(data:any){
-  this.categories = data;
-  this.categories.push({categoryName: 'Add New Category'});
-}
+  getAllCategories() {
+    this.addProductService
+      .getAllCategories()
+      .subscribe((data) => this.handleCategories(data));
+  }
+  handleCategories(data: any) {
+    this.categories = data;
+    this.categories.push({ categoryName: 'Add New Category' });
+  }
 }

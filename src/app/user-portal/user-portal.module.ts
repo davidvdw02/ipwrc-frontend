@@ -11,14 +11,12 @@ const userPortalRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    UserPortalComponent,
-  ],
+  declarations: [UserPortalComponent],
   imports: [
     CommonModule,
     ProductsModule,
     RouterModule.forChild(userPortalRoutes),
   ],
-  exports: [UserPortalComponent]
+  exports: [UserPortalComponent],
 })
-export class UserPortalModule { }
+export class UserPortalModule {}

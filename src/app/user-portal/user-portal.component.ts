@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-user-portal',
   templateUrl: './user-portal.component.html',
-  styleUrls: ['./user-portal.component.scss']
+  styleUrls: ['./user-portal.component.scss'],
 })
 export class UserPortalComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
