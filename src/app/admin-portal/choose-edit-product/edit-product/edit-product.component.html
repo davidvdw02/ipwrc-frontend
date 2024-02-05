@@ -27,10 +27,10 @@
       (ngModelChange)="oncategoryChange()"
     >
       <option [ngValue]="selectedProduct.category">
-        {{ selectedProduct.category.categoryName }}
+        {{ selectedProduct.category?.categoryName }}
       </option>
       <option *ngFor="let category of categories" [ngValue]="category">
-        {{ category.categoryName }}
+        {{ category?.categoryName }}
       </option>
     </select>
   </div>

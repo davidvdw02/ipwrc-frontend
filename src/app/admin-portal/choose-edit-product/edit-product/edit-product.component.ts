@@ -12,21 +12,25 @@ export class EditProductComponent implements OnInit {
   selectedProduct: Product;
   allCategories: Category[] = [];
   categories: Category[] = [];
+
   constructor(
     public dialogRef: MatDialogRef<EditProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.selectedProduct = data.selectedProduct;
-    this.allCategories = data.categories;
+    this.selectedProduct = data.selectedProduct || {};
+    this.allCategories = data.categories || [];
     this.oncategoryChange();
   }
 
   ngOnInit(): void {}
+
   oncategoryChange() {
-    this.categories = this.allCategories.filter(
-      (category: Category) =>
-        category.categoryId !== this.selectedProduct.category.categoryId
-    );
+    if (this.selectedProduct && this.selectedProduct.category && this.allCategories) {
+      this.categories = this.allCategories.filter(
+        (category: Category) =>
+          category.categoryId !== this.selectedProduct.category.categoryId
+      );
+    }
   }
 
   onEditSubmit() {
@@ -38,9 +42,11 @@ export class EditProductComponent implements OnInit {
     // Add logic to handle file selection for editing an existing product
     console.log('File selected for editing:', event.target.files[0]);
   }
+
   onCancel() {
     this.dialogRef.close();
   }
+
   onSave() {
     this.dialogRef.close(this.selectedProduct);
   }
