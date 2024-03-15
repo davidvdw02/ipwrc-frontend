@@ -41,7 +41,7 @@ export class ShoppingCartService {
         }
         if(count > quantity){
             for (let i = 0; i < count - quantity; i++) {
-               this.removeItem(product);F
+               this.removeItem(product);
             }
         }
         else{
