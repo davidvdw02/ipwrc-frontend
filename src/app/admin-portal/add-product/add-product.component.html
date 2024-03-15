@@ -53,9 +53,12 @@
       accept=".png"
       (change)="onFileSelected($event)"
       class="mr-2 w-full"
+      #fileInput
     />
     <small class="text-gray-500 inline">Only PNG files are accepted.</small>
+    <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" class="mt-2 w-32 h-32 object-cover rounded">
   </div>
+  
 
   <div class="mb-2">
     <label for="category" class="block mb-1">Category:</label>

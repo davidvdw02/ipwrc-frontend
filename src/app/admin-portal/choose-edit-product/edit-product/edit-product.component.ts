@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Category } from 'src/app/interfaces/category.interface';
 import { Product } from 'src/app/interfaces/product.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-product',
@@ -9,6 +10,7 @@ import { Product } from 'src/app/interfaces/product.interface';
   styleUrls: ['./edit-product.component.scss'],
 })
 export class EditProductComponent implements OnInit {
+  apiUrl = environment.apiUrl;
   selectedProduct: Product;
   allCategories: Category[] = [];
   categories: Category[] = [];

@@ -1,8 +1,8 @@
-<div class="bg-white rounded-lg shadow-lg p-4 text-center relative w-96">
+<div class="bg-white rounded-lg shadow-lg p-4 text-center relative">
   <div class="flex flex-row items-center">
     <img
-      class="w-64 h-auto object-contain mx-0 mb-2"
-      src="{{ product.imageUrl }}"
+      class="w-96 h-auto object-contain mx-0 mb-2"
+      src="{{apiUrl + product.imageUrl }}"
       alt="{{ product.name }}"
     />
     <div class="ml-4">
@@ -14,6 +14,7 @@
     </div>
   </div>
   <button
+    (click)="addToCart()"
     class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg absolute bottom-4 right-4"
   >
     Add to Cart

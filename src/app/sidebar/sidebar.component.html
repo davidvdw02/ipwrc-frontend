@@ -12,9 +12,17 @@
     </div>
   </nav>
   <button
+  *ngIf="isLoggedIn"
     [routerLink]="['/admin']"
     class="fixed bottom-4 left-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
   >
     Go to Admin Page
+  </button>
+  <button
+  *ngIf="!isLoggedIn"
+    [routerLink]="['/login']"
+    class="fixed bottom-4 left-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+  >
+    Login
   </button>
 </div>
