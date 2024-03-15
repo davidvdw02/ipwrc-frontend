@@ -7,16 +7,12 @@ import { AddCategoryDialogComponent } from './add-product/add-category-dialog/ad
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { EditProductComponent } from './choose-edit-product/edit-product/edit-product.component';
-import { ChooseEditProductComponent } from './choose-edit-product/choose-edit-product.component';
 
 @NgModule({
   declarations: [
     AdminPortalComponent,
     AddProductComponent,
     AddCategoryDialogComponent,
-    EditProductComponent,
-    ChooseEditProductComponent,
   ],
   imports: [
     CommonModule,
