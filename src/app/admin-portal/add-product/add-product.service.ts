@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Category } from 'src/app/interfaces/category.interface';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,11 +12,13 @@ export class AddProductService {
   public onCategorySave$: Observable<Category> =
     this.dataSubject.asObservable();
   private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   addProduct(product: any) {
     console.log(product);
-    this.http.post(this.apiUrl + 'products', product).subscribe();
+    this.http.post(this.apiUrl + 'products', product).subscribe(() => {
+      this.router.navigate(['']);
+    });
   }
 
   getAllCategories() {
