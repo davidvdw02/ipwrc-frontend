@@ -52,7 +52,6 @@ export class ChooseEditProductComponent implements OnInit {
       this.chooseEditProductService
         .updateProduct(result)
         .subscribe((data: any) => {
-          console.log(data);
         });
     });
   }

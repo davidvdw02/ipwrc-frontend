@@ -11,6 +11,7 @@ export class ShoppingCartComponent implements OnInit {
   productsObservable = this.shoppingCartService.getProductsObservable();
   isDropdownOpen = false;
   sortedProducts: any[] = [];
+  totalcost: number = 0;
 
   constructor(private shoppingCartService: ShoppingCartService) { }
 
@@ -24,6 +25,13 @@ export class ShoppingCartComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  calculateTotalCost() {
+    this.totalcost = 0;
+    for(let sortedProduct of this.sortedProducts) {
+      this.totalcost += sortedProduct.product.price * sortedProduct.quantity;
+    }
+  }
+
   clearCart() {
     this.shoppingCartService.clearCart();
   }
@@ -31,10 +39,10 @@ export class ShoppingCartComponent implements OnInit {
   sortProducts(products: Product[]) {
     let sortedProducts: any[] = [];
     this.sortedProducts = products.map((product) => {
-   
+
       if(sortedProducts.length === 0) {
         sortedProducts = [{product: product, quantity: 1}];
-       
+
       }else{
         for(let sortedProduct of sortedProducts) {
           if(sortedProduct.product.productId === product.productId) {
@@ -46,6 +54,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
    this.sortedProducts = sortedProducts;
+    this.calculateTotalCost();
   }
 
   updateQuantity(sortedProduct: any) {

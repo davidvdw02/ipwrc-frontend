@@ -15,7 +15,6 @@ export class AddProductService {
   constructor(private http: HttpClient, private router: Router) {}
 
   addProduct(product: any) {
-    console.log(product);
     this.http.post(this.apiUrl + 'products', product).subscribe(() => {
       this.router.navigate(['']);
     });

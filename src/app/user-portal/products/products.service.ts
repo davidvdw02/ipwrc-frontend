@@ -22,7 +22,6 @@ export class ProductService {
       this.getAllProducts();
       return;
     }
-    console.log(categoryId);
     this.http
       .get(this.apiUrl + 'products/category/' + categoryId)
       .subscribe((data) => {

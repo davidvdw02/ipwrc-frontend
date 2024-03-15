@@ -25,7 +25,7 @@ export class ShoppingCartService {
         const index = this.products.findIndex(p => p === product);
         if (index !== -1) {
           this.products.splice(index, 1);
-          this.productsSubject.next(this.products.slice()); 
+          this.productsSubject.next(this.products.slice());
         }
       }
 
@@ -40,11 +40,8 @@ export class ShoppingCartService {
             }
         }
         if(count > quantity){
-            console.log(count - quantity)
-            console.log(this.products)
             for (let i = 0; i < count - quantity; i++) {
                this.removeItem(product);
-                console.log('deleting')
             }
         }
         else{
