@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -13,13 +14,13 @@ import { environment } from 'src/environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class ProductComponent implements OnInit{
+export class ProductComponent{
 
    apiUrl = environment.apiUrl;
   @Input() product: any;
-
-  ngOnInit(): void {
-   console.log(this.product)
-   console.log(this.apiUrl+this.product.imageUrl)
+  constructor(private shoppingCartService: ShoppingCartService){}
+  addToCart() {
+    this.shoppingCartService.addItem(this.product);
   }
+
 }

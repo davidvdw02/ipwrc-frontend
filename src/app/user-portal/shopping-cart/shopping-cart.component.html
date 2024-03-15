@@ -1,0 +1,28 @@
+<div class="container mx-auto">
+    <div class="relative" *ngIf="sortedProducts.length > 0">
+        <button class="text-gray-800 font-semibold hover:text-gray-600 focus:outline-none focus:text-gray-600 
+        px-4 py-2 rounded-lg text-lg"
+  (click)="toggleDropdown()">
+View Cart
+<span class="ml-1">{{ sortedProducts.length }}</span>
+</button>
+        <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg z-10"
+             *ngIf="isDropdownOpen">
+            <div *ngFor="let sortedProduct of sortedProducts" class="flex items-center border-b border-gray-200 py-4">
+                <div>
+                    <p class="text-gray-600">{{ sortedProduct.product.name }}</p>
+                </div>
+                <div class="ml-auto">
+                    <input type="number" class="text-lg font-semibold w-12"
+                           [(ngModel)]="sortedProduct.quantity" (change)="updateQuantity(sortedProduct)">
+                </div>
+            </div>
+            <div class="p-2 flex justify-between">
+                <button class="text-sm text-gray-800 hover:text-gray-600"
+                        (click)="clearCart()">Clear Cart</button>
+                <button class="text-sm text-gray-800 hover:text-gray-600"
+                        (click)="toggleDropdown()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
