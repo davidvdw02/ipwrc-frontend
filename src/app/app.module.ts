@@ -8,6 +8,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdminPortalModule } from './admin-portal/admin-portal.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserPortalModule } from './user-portal/user-portal.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [AppComponent, SidebarComponent],
@@ -18,6 +19,7 @@ import { UserPortalModule } from './user-portal/user-portal.module';
     AdminPortalModule,
     NoopAnimationsModule,
     UserPortalModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
