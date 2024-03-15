@@ -72,16 +72,6 @@
   </div>
 
   <div *ngIf="selectedProduct" class="mb-2 flex flex-col">
-    <label for="editImageUpload" class="block mb-1 mr-2">Image Upload:</label>
-    <input
-      type="file"
-      id="editImageUpload"
-      name="editImageUpload"
-      accept=".png"
-      (change)="onEditFileSelected($event)"
-      class="mr-2 w-full"
-    />
-    <small class="text-gray-500 inline">Only PNG files are accepted.</small>
 
     <img
       class="w-64 h-auto object-contain mx-0 mb-2"
