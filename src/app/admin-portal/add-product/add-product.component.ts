@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddProductInterface } from 'src/app/interfaces/add.product.interface';
 import { AddProductService } from './add-product.service';
@@ -17,6 +17,8 @@ export const SELECT_A_CATEGORY: Category = {
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent implements OnInit {
+  @ViewChild('fileInput') fileInput: any;
+  imagePreview: string | null = null;
   product: AddProductInterface = {
     name: '',
     description: '',
@@ -47,17 +49,34 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
+    this.validateProduct();
     this.addProductService.addProduct(this.product);
     console.log(this.product);
+  }
+  validateProduct() {
+    
   }
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        this.product.image = reader.result as string;
-      };
-      reader.readAsDataURL(file);
+  
+      if (file.type === 'image/png') {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.product.image = reader.result as string;
+        };
+
+        reader.onload = (e: any) => {
+          this.imagePreview = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        this.imagePreview = null;
+        this.product.image = '';
+        alert('Please select a valid PNG file.');
+        this.fileInput.nativeElement.value = '';
+      }
     }
   }
   handleAddCategoryDIalog() {
