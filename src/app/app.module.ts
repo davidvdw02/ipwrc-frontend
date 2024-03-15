@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdminPortalModule } from './admin-portal/admin-portal.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserPortalModule } from './user-portal/user-portal.module';
+import { LoginModule } from './login/login.module';
+import { AuthInterceptor } from './login/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, SidebarComponent],
@@ -18,8 +20,11 @@ import { UserPortalModule } from './user-portal/user-portal.module';
     AdminPortalModule,
     NoopAnimationsModule,
     UserPortalModule,
+    LoginModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
