@@ -51,15 +51,14 @@ export class AddProductComponent implements OnInit {
   onSubmit() {
     this.validateProduct();
     this.addProductService.addProduct(this.product);
-    console.log(this.product);
   }
   validateProduct() {
-    
+
   }
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-  
+
       if (file.type === 'image/png') {
         const reader = new FileReader();
         reader.onloadend = () => {

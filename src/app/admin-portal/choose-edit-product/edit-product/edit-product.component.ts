@@ -36,14 +36,10 @@ export class EditProductComponent implements OnInit {
   }
 
   onEditSubmit() {
-    // Add logic to handle the submission of edits to an existing product
-    console.log('Edit Product submitted:', this.selectedProduct);
+
   }
 
-  onEditFileSelected(event: any) {
-    // Add logic to handle file selection for editing an existing product
-    console.log('File selected for editing:', event.target.files[0]);
-  }
+
 
   onCancel() {
     this.dialogRef.close();
