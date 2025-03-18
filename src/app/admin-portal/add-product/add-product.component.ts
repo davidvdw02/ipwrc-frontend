@@ -51,7 +51,7 @@ export class AddProductComponent implements OnInit {
     });
 
     // Subscribe to product add status
-    this.addProductService.onProductAddStatus$.subscribe(status => {
+    this.addProductService.onProductAddStatus$.subscribe((status) => {
       this.productAddStatus = status;
       if (status) {
         // Optionally, reset the form or show a message
@@ -100,10 +100,7 @@ export class AddProductComponent implements OnInit {
       isValid = false;
     }
 
-    if (
-      this.product.quantityInStock === null ||
-      this.product.quantityInStock < 0
-    ) {
+    if (this.product.quantityInStock === null || this.product.quantityInStock < 0) {
       this.quantityError = 'Quantity must be 0 or greater.';
       isValid = false;
     }
@@ -164,9 +161,7 @@ export class AddProductComponent implements OnInit {
   }
 
   getAllCategories() {
-    this.addProductService
-      .getAllCategories()
-      .subscribe((data) => this.handleCategories(data));
+    this.addProductService.getAllCategories().subscribe((data) => this.handleCategories(data));
   }
 
   handleCategories(data: any) {

@@ -18,12 +18,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private productservice: ProductService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.subscription = productservice.productsSubject.subscribe(
-      (data) => {
-        this.products = data;
-        this.preloadImages();
-      }
-    );
+    this.subscription = productservice.productsSubject.subscribe((data) => {
+      this.products = data;
+      this.preloadImages();
+    });
   }
 
   ngOnInit(): void {
@@ -41,7 +39,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     if (this.products && this.products.length) {
       this.products.forEach((product) => {
         const img = new Image();
-        img.src = environment.apiUrl + product.imageUrl; 
+        img.src = environment.apiUrl + product.imageUrl;
       });
     }
   }

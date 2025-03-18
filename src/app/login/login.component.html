@@ -1,21 +1,33 @@
 <div class="bg-gray-200 min-h-screen flex items-center justify-center">
   <div class="bg-white p-8 rounded shadow-md max-w-md w-full">
-      <h2 class="text-2xl font-semibold mb-4">Login</h2>
-      <div *ngIf="errorMessage" class="text-red-500 mt-3">{{ errorMessage }}</div> 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-          <div class="flex flex-col">
-              <label for="username" class="text-sm font-semibold mb-1">Username</label>
-              <input formControlName="username" id="username" type="text"
-                  class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500">
-          </div>
-          <div class="flex flex-col">
-              <label for="password" class="text-sm font-semibold mb-1">Password</label>
-              <input formControlName="password" id="password" type="password"
-                  class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500">
-          </div>
-          <button type="submit"
-              class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">Login</button>
-      </form>
-      <p>Username en password is password :)</p>
-       </div>
+    <h2 class="text-2xl font-semibold mb-4">Login</h2>
+    <div *ngIf="errorMessage" class="text-red-500 mt-3">{{ errorMessage }}</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="flex flex-col">
+        <label for="username" class="text-sm font-semibold mb-1">Username</label>
+        <input
+          formControlName="username"
+          id="username"
+          type="text"
+          class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="password" class="text-sm font-semibold mb-1">Password</label>
+        <input
+          formControlName="password"
+          id="password"
+          type="password"
+          class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+      >
+        Login
+      </button>
+    </form>
+    <p>Username en password is password :)</p>
+  </div>
 </div>

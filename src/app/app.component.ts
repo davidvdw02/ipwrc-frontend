@@ -23,11 +23,9 @@ export class AppComponent implements OnInit {
       this.categories = data;
     });
 
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.updateSidebarVisibility();
-      });
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      this.updateSidebarVisibility();
+    });
   }
 
   updateSidebarVisibility(): void {

@@ -5,7 +5,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
   productsObservable = this.shoppingCartService.getProductsObservable();
@@ -13,11 +13,11 @@ export class ShoppingCartComponent implements OnInit {
   sortedProducts: any = [];
   totalcost: number = 0;
 
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
     this.productsObservable.subscribe((data) => {
-      this.sortProducts(data)
+      this.sortProducts(data);
     });
   }
 
@@ -37,24 +37,21 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   sortProducts(products: Product[]) {
-      const productCounts = new Map<number, number>(); 
-  
-      products.forEach((product) => {
-        const count = productCounts.get(product.productId) || 0;
-        productCounts.set(product.productId, count + 1);
-      });
-  
-      this.sortedProducts = Array.from(productCounts.entries()).map(
-        ([productId, quantity]) => ({
-          product: products.find((p) => p.productId === productId),
-          quantity,
-        })
-      );
-      this.calculateTotalCost();
-    }
+    const productCounts = new Map<number, number>();
+
+    products.forEach((product) => {
+      const count = productCounts.get(product.productId) || 0;
+      productCounts.set(product.productId, count + 1);
+    });
+
+    this.sortedProducts = Array.from(productCounts.entries()).map(([productId, quantity]) => ({
+      product: products.find((p) => p.productId === productId),
+      quantity,
+    }));
+    this.calculateTotalCost();
+  }
 
   updateQuantity(sortedProduct: any, quantity: number) {
-
     if (quantity < 0) {
       quantity = 0;
     }
