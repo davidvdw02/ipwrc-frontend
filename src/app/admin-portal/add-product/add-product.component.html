@@ -11,6 +11,7 @@
         [(ngModel)]="product.name"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
+      <p *ngIf="nameError" class="text-red-500 text-xs italic">{{ nameError }}</p>
     </div>
 
     <div>
@@ -21,6 +22,9 @@
         [(ngModel)]="product.description"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       ></textarea>
+      <p *ngIf="descriptionError" class="text-red-500 text-xs italic">
+        {{ descriptionError }}
+      </p>
     </div>
 
     <div>
@@ -32,10 +36,13 @@
         [(ngModel)]="product.price"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
+      <p *ngIf="priceError" class="text-red-500 text-xs italic">{{ priceError }}</p>
     </div>
 
     <div>
-      <label for="quantityInStock" class="block text-gray-700 text-sm font-bold mb-2">Quantity in Stock:</label>
+      <label for="quantityInStock" class="block text-gray-700 text-sm font-bold mb-2">
+        Quantity in Stock:
+      </label>
       <input
         type="number"
         id="quantityInStock"
@@ -43,10 +50,15 @@
         [(ngModel)]="product.quantityInStock"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
+      <p *ngIf="quantityError" class="text-red-500 text-xs italic">
+        {{ quantityError }}
+      </p>
     </div>
 
     <div>
-      <label for="imageUpload" class="block text-gray-700 text-sm font-bold mb-2">Image Upload:</label>
+      <label for="imageUpload" class="block text-gray-700 text-sm font-bold mb-2">
+        Image Upload:
+      </label>
       <input
         type="file"
         id="imageUpload"
@@ -63,21 +75,29 @@
         alt="Image Preview"
         class="mt-2 w-32 h-32 object-cover rounded"
       />
+      <p *ngIf="imageError" class="text-red-500 text-xs italic">{{ imageError }}</p>
     </div>
 
     <div>
-      <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Category:</label>
+      <label for="category" class="block text-gray-700 text-sm font-bold mb-2">
+        Category:
+      </label>
       <select
         name="category"
         [(ngModel)]="product.category"
         (change)="onCategoryChange()"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
-        <option disabled selected>Select a category</option>
+        <option [ngValue]="{ categoryName: 'Select Category' }" disabled selected>
+          Select a category
+        </option>
         <option *ngFor="let category of categories" [ngValue]="category">
           {{ category.categoryName }}
         </option>
       </select>
+      <p *ngIf="categoryError" class="text-red-500 text-xs italic">
+        {{ categoryError }}
+      </p>
     </div>
 
     <div class="flex justify-center">
@@ -89,4 +109,11 @@
       </button>
     </div>
   </form>
+
+  <div *ngIf="productAddStatus === true" class="mt-4 text-green-500 text-center">
+    Product added successfully!
+  </div>
+  <div *ngIf="productAddStatus === false" class="mt-4 text-red-500 text-center">
+    Error adding product. Please try again.
+  </div>
 </div>

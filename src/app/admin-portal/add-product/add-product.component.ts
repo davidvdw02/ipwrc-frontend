@@ -27,7 +27,17 @@ export class AddProductComponent implements OnInit {
     image: '',
     category: { categoryName: 'Select Category' },
   };
-  categories: any = [];
+  categories: any[] = [];
+
+  // Error flags for each field
+  nameError: string | null = null;
+  descriptionError: string | null = null;
+  priceError: string | null = null;
+  quantityError: string | null = null;
+  imageError: string | null = null;
+  categoryError: string | null = null;
+
+  productAddStatus: boolean | null = null;
 
   constructor(
     private addProductService: AddProductService,
@@ -39,6 +49,16 @@ export class AddProductComponent implements OnInit {
       this.categories.push(data);
       this.product.category = data;
     });
+
+    // Subscribe to product add status
+    this.addProductService.onProductAddStatus$.subscribe(status => {
+      this.productAddStatus = status;
+      if (status) {
+        // Optionally, reset the form or show a message
+        this.resetForm();
+      }
+    });
+
     this.getAllCategories();
   }
 
@@ -49,12 +69,62 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit() {
-    this.validateProduct();
-    this.addProductService.addProduct(this.product);
+    if (this.validateProduct()) {
+      this.addProductService.addProduct(this.product);
+    }
   }
-  validateProduct() {
 
+  validateProduct(): boolean {
+    let isValid = true;
+
+    // Reset errors
+    this.nameError = null;
+    this.descriptionError = null;
+    this.priceError = null;
+    this.quantityError = null;
+    this.imageError = null;
+    this.categoryError = null;
+
+    if (!this.product.name) {
+      this.nameError = 'Name is required.';
+      isValid = false;
+    }
+
+    if (!this.product.description) {
+      this.descriptionError = 'Description is required.';
+      isValid = false;
+    }
+
+    if (this.product.price === null || this.product.price <= 0) {
+      this.priceError = 'Price must be greater than 0.';
+      isValid = false;
+    }
+
+    if (
+      this.product.quantityInStock === null ||
+      this.product.quantityInStock < 0
+    ) {
+      this.quantityError = 'Quantity must be 0 or greater.';
+      isValid = false;
+    }
+
+    if (!this.product.image) {
+      this.imageError = 'Image is required.';
+      isValid = false;
+    }
+
+    if (
+      !this.product.category ||
+      !this.product.category.categoryName ||
+      this.product.category.categoryName === 'Select Category'
+    ) {
+      this.categoryError = 'Category is required.';
+      isValid = false;
+    }
+
+    return isValid;
   }
+
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -70,6 +140,7 @@ export class AddProductComponent implements OnInit {
         };
 
         reader.readAsDataURL(file);
+        this.imageError = null; // Clear image error on selection
       } else {
         this.imagePreview = null;
         this.product.image = '';
@@ -78,6 +149,7 @@ export class AddProductComponent implements OnInit {
       }
     }
   }
+
   handleAddCategoryDIalog() {
     const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
       width: '400px',
@@ -96,8 +168,31 @@ export class AddProductComponent implements OnInit {
       .getAllCategories()
       .subscribe((data) => this.handleCategories(data));
   }
+
   handleCategories(data: any) {
     this.categories = data;
     this.categories.push({ categoryName: 'Add New Category' });
+  }
+
+  resetForm() {
+    this.product = {
+      name: '',
+      description: '',
+      price: 0,
+      quantityInStock: 0,
+      image: '',
+      category: { categoryName: 'Select Category' },
+    };
+    this.imagePreview = null;
+    this.fileInput.nativeElement.value = ''; // Clear the file input
+
+    // Clear all error messages
+    this.nameError = null;
+    this.descriptionError = null;
+    this.priceError = null;
+    this.quantityError = null;
+    this.imageError = null;
+    this.categoryError = null;
+    this.productAddStatus = null;
   }
 }
