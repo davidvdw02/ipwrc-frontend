@@ -3,10 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from 'src/app/interfaces/product.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShoppingCartService {
-  private productsSubject = new BehaviorSubject<Product[]>([]); 
+  private productsSubject = new BehaviorSubject<Product[]>([]);
   private products: Product[] = [];
 
   getItems() {
@@ -15,16 +15,16 @@ export class ShoppingCartService {
 
   addItem(product: Product) {
     this.products.push(product);
-    this.productsSubject.next([...this.products]); 
+    this.productsSubject.next([...this.products]);
   }
 
   clearCart() {
     this.products = [];
-    this.productsSubject.next([]); 
+    this.productsSubject.next([]);
   }
 
   removeItem(product: Product) {
-    this.products = this.products.filter(p => p.productId !== product.productId);
+    this.products = this.products.filter((p) => p.productId !== product.productId);
     this.productsSubject.next([...this.products]);
   }
 
@@ -38,18 +38,17 @@ export class ShoppingCartService {
       return;
     }
 
-    let productsOfId = this.products.filter(p => p.productId === product.productId);
+    let productsOfId = this.products.filter((p) => p.productId === product.productId);
     let count = productsOfId.length;
 
-    if(count > quantity){
+    if (count > quantity) {
       for (let i = 0; i < count - quantity; i++) {
-         this.products.splice(this.products.indexOf(productsOfId[0]), 1);
+        this.products.splice(this.products.indexOf(productsOfId[0]), 1);
       }
-    }
-    else{
-        for (let i = 0; i < quantity - count; i++) {
-            this.addItem(product);
-        }
+    } else {
+      for (let i = 0; i < quantity - count; i++) {
+        this.addItem(product);
+      }
     }
     this.productsSubject.next([...this.products]);
   }

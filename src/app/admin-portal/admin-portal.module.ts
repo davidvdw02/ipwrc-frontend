@@ -9,18 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    AdminPortalComponent,
-    AddProductComponent,
-    AddCategoryDialogComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatDialogModule,
-    RouterModule,
-    MatInputModule,
-  ],
+  declarations: [AdminPortalComponent, AddProductComponent, AddCategoryDialogComponent],
+  imports: [CommonModule, FormsModule, MatDialogModule, RouterModule, MatInputModule],
   exports: [AdminPortalComponent],
 })
 export class AdminPortalModule {}

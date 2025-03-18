@@ -5,15 +5,12 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './login/login.guard';
 
 const routes: Routes = [
-  { path: 'admin', component: AdminPortalComponent, canActivate: [AuthGuard]},
+  { path: 'admin', component: AdminPortalComponent, canActivate: [AuthGuard] },
   {
     path: 'user',
-    loadChildren: () =>
-      import('./user-portal/user-portal.module').then(
-        (m) => m.UserPortalModule
-      ),
+    loadChildren: () => import('./user-portal/user-portal.module').then((m) => m.UserPortalModule),
   },
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

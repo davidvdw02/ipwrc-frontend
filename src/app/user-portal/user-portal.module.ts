@@ -14,12 +14,7 @@ const userPortalRoutes: Routes = [
 
 @NgModule({
   declarations: [UserPortalComponent, ShoppingCartComponent],
-  imports: [
-    CommonModule,
-    ProductsModule,
-    RouterModule.forChild(userPortalRoutes),
-    FormsModule,
-  ],
+  imports: [CommonModule, ProductsModule, RouterModule.forChild(userPortalRoutes), FormsModule],
   exports: [UserPortalComponent],
 })
 export class UserPortalModule {}

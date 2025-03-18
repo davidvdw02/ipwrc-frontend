@@ -22,10 +22,8 @@ export class ProductService {
       this.getAllProducts();
       return;
     }
-    this.http
-      .get(this.apiUrl + 'products/category/' + categoryId)
-      .subscribe((data) => {
-        this.productsSubject.next(data as Product[]);
-      });
+    this.http.get(this.apiUrl + 'products/category/' + categoryId).subscribe((data) => {
+      this.productsSubject.next(data as Product[]);
+    });
   }
 }

@@ -14,13 +14,11 @@ import { ShoppingCartService } from '../../shopping-cart/shopping-cart.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class ProductComponent{
-
-   apiUrl = environment.apiUrl;
+export class ProductComponent {
+  apiUrl = environment.apiUrl;
   @Input() product: any;
-  constructor(private shoppingCartService: ShoppingCartService){}
+  constructor(private shoppingCartService: ShoppingCartService) {}
   addToCart() {
     this.shoppingCartService.addItem(this.product);
   }
-
 }
