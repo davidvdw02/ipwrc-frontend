@@ -1,5 +1,5 @@
-<div class="flex flex-wrap">
-  <div *ngFor="let product of products" style="margin-right: 10px; margin-top: 25px;">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div *ngFor="let product of products">
     <app-product [product]="product"></app-product>
   </div>
 </div>
