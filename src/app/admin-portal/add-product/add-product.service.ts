@@ -28,28 +28,14 @@ export class AddProductService {
         this.http
             .post(this.apiUrl + 'products', product, {
                 observe: 'response',
-                responseType: 'text', 
+                responseType: 'text',
             })
             .subscribe({
                 next: (response: HttpResponse<string>) => {
                     if (response.status === 201) {
-                        console.log('Response:', response.body); 
-        
-                        if (response.body?.includes('Product created')) {
-                            this.router.navigate(['']);
-                            this.productAddStatusSubject.next(true);
-                        } else {
-                            console.log(
-                                'Unexpected success response:',
-                                response.body
-                            );
-                            this.productAddStatusSubject.next(false);
-                        }
+                        this.router.navigate(['']);
+                        this.productAddStatusSubject.next(true);
                     } else {
-                        console.log(
-                            'Unexpected success status code:',
-                            response.status
-                        );
                         this.productAddStatusSubject.next(false);
                     }
                 },
