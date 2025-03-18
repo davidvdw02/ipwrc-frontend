@@ -9,7 +9,7 @@ import { Product } from 'src/app/interfaces/product.interface';
 })
 export class ShoppingCartComponent implements OnInit {
   productsObservable = this.shoppingCartService.getProductsObservable();
-  isCartOpen = false; 
+  isCartOpen = false;
   sortedProducts: any = [];
   totalcost: number = 0;
 
@@ -21,13 +21,13 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
-  toggleCart() { 
+  toggleCart() {
     this.isCartOpen = !this.isCartOpen;
   }
 
   calculateTotalCost() {
     this.totalcost = 0;
-    for(let sortedProduct of this.sortedProducts) {
+    for (let sortedProduct of this.sortedProducts) {
       this.totalcost += sortedProduct.product.price * sortedProduct.quantity;
     }
   }
@@ -37,16 +37,19 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   sortProducts(products: Product[]) {
-      let sortedProducts: any = [];
+      const productCounts = new Map<number, number>(); 
+  
       products.forEach((product) => {
-        const existingProduct = sortedProducts.find((sortedProduct: any) => sortedProduct.product.productId === product.productId);
-        if (existingProduct) {
-          existingProduct.quantity++;
-        } else {
-          sortedProducts.push({ product: product, quantity: 1 });
-        }
+        const count = productCounts.get(product.productId) || 0;
+        productCounts.set(product.productId, count + 1);
       });
-      this.sortedProducts = sortedProducts;
+  
+      this.sortedProducts = Array.from(productCounts.entries()).map(
+        ([productId, quantity]) => ({
+          product: products.find((p) => p.productId === productId),
+          quantity,
+        })
+      );
       this.calculateTotalCost();
     }
 
@@ -61,7 +64,7 @@ export class ShoppingCartComponent implements OnInit {
     this.calculateTotalCost();
   }
 
-  removeItem(product: Product){
+  removeItem(product: Product) {
     this.shoppingCartService.removeItem(product);
   }
 }
