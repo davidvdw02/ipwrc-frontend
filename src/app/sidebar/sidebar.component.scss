@@ -1,5 +1,10 @@
+/* src/app/sidebar/sidebar.component.scss */
 .sidebar-nav {
   background-color: #dbeafe;
+  display: flex; /* Enable flex layout */
+  flex-direction: column; /* Stack items vertically */
+  height: 100%; /* Take full height of parent */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .sidebar-nav a {
