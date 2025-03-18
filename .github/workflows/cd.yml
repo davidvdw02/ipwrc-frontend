@@ -33,7 +33,7 @@ jobs:
       - name: Deploy to Hostinger VPS
         uses: appleboy/ssh-action@master
         with:
-          host: 149.100.156.79
+          host: 69.62.121.242
           username: root
           key: ${{ secrets.SSH }}
           script: |
