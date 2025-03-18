@@ -1,8 +1,11 @@
-<div>
-  <div class="absolute top-0 right-0 mt-4 mr-4">
-    <app-shopping-cart></app-shopping-cart>
+<div class="relative">
+  <div class="left-1/2 -translate-x-1/2 z-10">
+    <app-top-actions
+      (sortOptionSelected)="productsComponent.onSortOptionSelected($event)" 
+    ></app-top-actions>
   </div>
-  <div class="container mx-auto">
-    <app-products></app-products>
+  <div class="container mx-auto
+  ">
+    <app-products #productsComponent></app-products> 
   </div>
 </div>

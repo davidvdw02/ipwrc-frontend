@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { FormsModule } from '@angular/forms';
+import { TopActionsComponent } from './top-actions/top-actions.component';
 
 const userPortalRoutes: Routes = [
   { path: '', component: UserPortalComponent },
@@ -13,7 +14,7 @@ const userPortalRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UserPortalComponent, ShoppingCartComponent],
+  declarations: [UserPortalComponent, ShoppingCartComponent, TopActionsComponent],
   imports: [CommonModule, ProductsModule, RouterModule.forChild(userPortalRoutes), FormsModule],
   exports: [UserPortalComponent],
 })
