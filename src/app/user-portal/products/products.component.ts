@@ -3,6 +3,8 @@ import { ProductService } from './products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product.interface';
 import { environment } from 'src/environments/environment';
+import { Subscription } from 'rxjs';
+import { SearchService } from 'src/app/search.service';
 
 @Component({
   selector: 'app-products',
@@ -13,14 +15,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subscription: any;
   categoryId: string = '';
   products: Product[] = [];
+  filteredProducts: Product[]= [];
+  searchSubscription: Subscription = new Subscription();
+  sortOption: string = ''; 
 
   constructor(
     private productservice: ProductService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private searchService: SearchService
   ) {
     this.subscription = productservice.productsSubject.subscribe((data) => {
       this.products = data;
       this.preloadImages();
+      this.applyFilter();
+      this.applySort(); // Add this
     });
   }
 
@@ -29,10 +37,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.categoryId = params['id'];
       this.productservice.handleCategoryInput(this.categoryId);
     });
+
+    this.searchSubscription = this.searchService.search$.subscribe((query) => {
+      this.applyFilter(query);
+    });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.searchSubscription.unsubscribe();
   }
 
   preloadImages() {
@@ -42,5 +55,28 @@ export class ProductsComponent implements OnInit, OnDestroy {
         img.src = environment.apiUrl + product.imageUrl;
       });
     }
+  }
+
+  applyFilter(query: string = '') {
+    query = query.toLowerCase();
+    this.filteredProducts = this.products.filter((product) =>
+      product.name.toLowerCase().includes(query)
+    );
+    this.applySort(); // Add this
+  }
+
+  applySort() {
+    // Add this
+    if (this.sortOption === 'price-low-to-high') {
+      this.filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (this.sortOption === 'price-high-to-low') {
+      this.filteredProducts.sort((a, b) => b.price - a.price);
+    }
+  }
+
+  onSortOptionSelected(option: string) {
+    // Add this
+    this.sortOption = option;
+    this.applySort();
   }
 }
