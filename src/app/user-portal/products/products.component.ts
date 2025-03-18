@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.products = data;
       this.preloadImages();
       this.applyFilter();
-      this.applySort(); // Add this
+      this.applySort();
     });
   }
 
@@ -62,11 +62,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.filteredProducts = this.products.filter((product) =>
       product.name.toLowerCase().includes(query)
     );
-    this.applySort(); // Add this
+    this.applySort(); 
   }
 
   applySort() {
-    // Add this
     if (this.sortOption === 'price-low-to-high') {
       this.filteredProducts.sort((a, b) => a.price - b.price);
     } else if (this.sortOption === 'price-high-to-low') {
@@ -75,7 +74,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onSortOptionSelected(option: string) {
-    // Add this
     this.sortOption = option;
     this.applySort();
   }

@@ -16,7 +16,6 @@ export class AddProductService {
     private productAddStatusSubject = new Subject<boolean>();
     public onProductAddStatus$: Observable<boolean> = this.productAddStatusSubject.asObservable();
 
-    // Add this subject
     private categoryAddedSubject = new Subject<void>();
     public categoryAdded$: Observable<void> = this.categoryAddedSubject.asObservable();
 
