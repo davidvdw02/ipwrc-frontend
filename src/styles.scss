@@ -12,5 +12,9 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f3f4f6; /* This is Tailwind's gray-100 in hex */
+  background-color: #f3f4f6;
+}
+
+.cart-drawer {
+  z-index: 1000; 
 }
